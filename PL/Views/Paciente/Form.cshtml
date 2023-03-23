@@ -1,0 +1,108 @@
+﻿@model ML.Paciente
+@{
+    ViewData["Title"] = "Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Paciente</h2>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            @using (Html.BeginForm("Form", "Paciente", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div class="form-horizontal">
+                    <div class="col-md-3">
+                        @Html.LabelFor(model => model.IdPaciente)
+                        <div class="input-group">
+                            @Html.TextBoxFor(model => model.IdPaciente, new { @class = "form-control", @id = "txtIdPaciente" })
+                            @Html.ValidationMessageFor(model => model.IdPaciente,"", new { @class = "text-danger"})
+                        </div>
+                        @Html.Label(null, "", new {@id ="lblIdPaciente"})
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-3">
+                            @Html.LabelFor(model => model.Nombre)
+                            <div class="input-group">
+                                @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control", @id = "txtNombre" })
+                                @Html.ValidationMessageFor(model => model.Nombre,"", new { @class = "text-danger"})
+                            </div>
+                            @Html.Label(null, "", new {@id ="lblNombre"})
+                        </div>
+
+
+                        <div class="col-md-3">
+                            @Html.LabelFor(model => model.ApellidoPaterno)
+                            <div class="input-group">
+                                @Html.TextBoxFor(model => model.ApellidoPaterno, new { @class = "form-control", @id = "txtApellidoPaterno" })
+                                @Html.ValidationMessageFor(model => model.ApellidoPaterno,"", new { @class = "text-danger"})
+                            </div>
+                            @Html.Label(null, "", new {@id ="lblApellidoPaterno"})
+                        </div>
+
+                        <div class="col-md-3">
+                            @Html.LabelFor(model => model.ApellidoMaterno)
+                            <div class="input-group">
+                                @Html.TextBoxFor(model => model.ApellidoMaterno, new { @class = "form-control", @id = "txtApellidoMaterno" })
+                                @Html.ValidationMessageFor(model => model.ApellidoMaterno,"", new { @class = "text-danger"})
+                            </div>
+                            @Html.Label(null, "", new {@id ="lblApellidoMaterno"})
+                        </div>
+
+                        <div class="col-md-3">
+                            @Html.LabelFor(model => model.Sexo)
+                            @Html.TextBoxFor(model => model.Sexo, new { @class = "form-control", @id = "txtSexo" })
+                            @Html.ValidationMessageFor(model => model.Sexo)
+                        </div>
+
+                    </div>
+
+
+                    <div class="row">
+
+                        <div class="col-md-3">
+                            @Html.LabelFor(model => model.FechaNacimiento)
+                            <div class="input-group">
+                                @Html.TextBoxFor(model => model.FechaNacimiento, new { @class = "form-control", @id = "txtFechaNacimiento" })
+                                @Html.ValidationMessageFor(model => model.FechaNacimiento,"", new { @class = "text-danger"})
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            @Html.LabelFor(model => model.TipoSangre)
+                            <div class="input-group">
+                                @Html.DropDownListFor(model => model.TipoSangre.IdTipoSangre, new SelectList(Model.TipoSangre.TipoSangres, "IdTipoSangre", "Nombre"), "Tipo de sangre", new { @class = "form-control" })
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            @Html.LabelFor(model => model.Diagnostico)
+                            <div class="input-group">
+                                @Html.TextBoxFor(model => model.Diagnostico, new { @class = "form-control", @id = "txtDiagnostico" })
+                                @Html.ValidationMessageFor(model => model.Diagnostico,"", new { @class = "text-danger"})
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <input type="submit" value="Guardar" class="btn btn-primary" />
+                        </div>
+                        <br />
+                        <div class="input-group">
+                            @Html.ActionLink("Regresar", "GetAll", "Paciente", htmlAttributes: new { @class = "btn btn-success" })
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,60 @@
+﻿@model ML.Paciente
+@{
+    ViewData["Title"] = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <h2>Paciente</h2>
+    </div>
+    <div class="col-md-3">
+            @Html.ActionLink("Agregar Paciente", "Form", "Paciente", htmlAttributes: new { @class = "btn btn-success" })
+    </div>
+    <br />
+    <div class="row">
+        @if (Model.Pacientes != null)
+        {
+            <table class="table table-bordered table-responsive table-hover">
+                <thead>
+                    <tr>
+                        <td class="text-center" style=" font-weight:bold;">Editar</td>
+
+                        <td class="text-center" style=" font-weight:bold;">Nombre</td>
+                        <td class="text-center" style=" font-weight:bold;">Fecha Nacimiento</td>
+                        <td class="text-center" style=" font-weight:bold;">Tipo Sangre</td>
+                        <td class="text-center" style=" font-weight:bold;">Sexo</td>
+                        <td class="text-center" style=" font-weight:bold;">Fecha Ingreso</td>
+                        <td class="text-center" style=" font-weight:bold;">Diagnostico</td>
+
+                        <td class="text-center" style=" font-weight:bold;">Eliminar</td>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (ML.Paciente paciente in Model.Pacientes)
+                    {
+                        <tr>
+                            <td><a class="bi bi-pencil-fill" href="@Url.Action("Form", "Paciente", new { IdPaciente = paciente.IdPaciente })"></a></td>
+
+                            <td>@paciente.Nombre @paciente.ApellidoPaterno @paciente.ApellidoMaterno</td>
+                            <td>@paciente.FechaNacimiento</td>
+                            <td>@paciente.TipoSangre.Nombre</td>
+                            <td>@paciente.Sexo</td>
+                            <td>@paciente.FechaIngreso</td>
+                            <td>@paciente.Diagnostico</td>
+
+
+                            <td><a class="bi bi-backspace-fill" href="@Url.Action("Delete", "Paciente", new { IdPaciente = paciente.IdPaciente })" onclick="return confirm('Estas seguro que deseas eliminar este registro?');"></a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <div class="alert alert-warning" role="alert">Ocurrio un error al realizar la consulta </div>
+        }
+    </div>
+</div>
+
